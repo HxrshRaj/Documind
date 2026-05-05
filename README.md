@@ -1,19 +1,19 @@
-# 🤖 Documind — AI Agent Core (Zero-Hallucination RAG)
+# 🤖 Documind — AI Agent Core (Zero-Hallucination System)
 
-> A production-style AI agent system that enforces strict guardrails, low-latency retrieval, and observability for reliable enterprise AI deployments.
+> A production-style AI backend that enforces strict guardrails, latency tracking, and safe fallback logic for real-world AI agents.
 
 ---
 
-## 🚀 Problem
+## 🚀 Why This Exists
 
-LLMs in production suffer from:
+AI systems in production fail due to:
 
-* ❌ Hallucinations
-* ❌ High latency
-* ❌ Lack of grounding in real data
-* ❌ Untraceable failures
+* Hallucinated responses
+* High latency
+* Unsafe outputs
+* Lack of observability
 
-For real-world systems (like AI call agents), this is unacceptable.
+This system focuses on **reliability over raw intelligence**.
 
 ---
 
@@ -21,9 +21,9 @@ For real-world systems (like AI call agents), this is unacceptable.
 
 ```mermaid
 graph TD
-Client --> API[FastAPI Layer]
+Client --> API[FastAPI]
 API --> Guardrails
-Guardrails --> Retriever[FAISS Engine (C++)]
+Guardrails --> Retriever[FAISS Engine]
 Retriever --> Context
 Context --> LLM
 LLM --> Response
@@ -32,104 +32,93 @@ Response --> Observability
 
 ---
 
-## ⚙️ Tech Stack
-
-* FastAPI (API layer)
-* FAISS (C++ vector search engine)
-* LangChain (RAG orchestration)
-* Docker (containerization)
-
----
-
-## 🔥 Core Features
+## 🔥 Core Capabilities
 
 ### ✅ Zero-Hallucination Guardrails
 
-* Query validation before LLM call
-* Context-restricted prompting
-* Fallback to human escalation
+* Reject unsafe queries
+* Restrict answers to known context
+* Enforce fallback when uncertain
 
 ---
 
-### ✅ Sub-Millisecond Retrieval
-
-* FAISS-based vector similarity search
-* Optimized for large-scale embeddings
-
----
-
-### ✅ Observability Layer
+### ✅ Latency Observability
 
 Tracks:
 
-* LLM latency
-* Retrieval latency
-* Failure cases
-* Unsafe queries
+* API latency
+* LLM response time
+* End-to-end processing
 
 ---
 
-### ✅ AI Agent Behavior
+### ✅ Safe Fallback System
 
-Simulates:
+If confidence is low:
+
+```json
+{
+  "fallback": "Escalate to human agent"
+}
+```
+
+---
+
+### ✅ AI Agent Simulation
+
+Designed for:
 
 * AI receptionist
 * AI sales assistant
-* CRM-aware responses
+* CRM-integrated responses
 
 ---
 
 ## 📊 API
 
 ```http
-GET /query?q=customer_followup
+GET /query?q=customer_query
 ```
 
 ---
 
 ## ⚖️ Design Decisions
 
-| Decision             | Reason                     |
-| -------------------- | -------------------------- |
-| RAG over fine-tuning | Dynamic knowledge updates  |
-| FAISS (C++)          | High-performance retrieval |
-| Guardrails           | Prevent hallucination      |
-| Middleware logging   | Debug latency issues       |
+| Decision         | Reason               |
+| ---------------- | -------------------- |
+| RAG approach     | Avoids hallucination |
+| Guardrails layer | Ensures safety       |
+| Observability    | Debug AI failures    |
+| FAISS            | Fast retrieval       |
 
 ---
 
-## 🚧 Failure Handling
+## 🚧 What Breaks in Production?
 
-* Low confidence → fallback response
-* Missing context → no-answer policy
-* Unsafe query → blocked
+* Missing context → wrong answers
+* LLM latency spikes
+* Unsafe user input
+* Model inconsistency
+
+This system prioritizes **safety and reliability** over raw output.
 
 ---
 
 ## 📈 Scaling Strategy
 
-* Horizontal scaling of API layer
-* Sharded vector databases
-* Caching frequent queries
+* Stateless API scaling
+* Vector DB sharding
+* Response caching
 
 ---
 
 ## 🌍 Real-World Mapping
 
-This system mirrors AI agents used in:
+This mirrors AI agents used in:
 
 * Call centers
 * Sales automation
-* Customer support workflows
-
----
-
-## 🚀 Future Improvements
-
-* Streaming LLM responses
-* Reinforcement learning feedback loop
-* Multi-agent orchestration
-* Real CRM integration
+* Customer support
 
 ---
 
